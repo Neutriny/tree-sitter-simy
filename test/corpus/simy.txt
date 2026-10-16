@@ -2,11 +2,11 @@
 declarations
 ==================
 
-const MAX_HEALTH = 20;
-let damage = 10;
-let mut timer = 0;
-let target: entity = @e[type=creeper];
-let _ = compute();
+const MAX_HEALTH = 20
+let damage = 10
+let mut timer = 0
+let target: entity = @e[type=creeper]
+let _ = compute()
 
 ---
 
@@ -46,22 +46,22 @@ let _ = compute();
 types
 ==================
 
-let a: num = 1;
-let b: float = 1.5;
-let c: bool = true;
-let d: str = "hi";
-let e: entity = @a;
-let f: selector = @e[type=zombie];
-let g: pos = ~ ~1 ~;
-let h: vec3 = (0.5, 1.0, -0.2);
-let i: block = minecraft:chest[waterlogged=true];
-let j: item = minecraft:diamond_sword;
-let k: team = "adventure";
-let l: tag = "boss";
-let m: nbt = {Health:10f};
-let n: list<num> = values;
-let o: map<str, num> = storage;
-let p: option<entity> = target;
+let a: num = 1
+let b: float = 1.5
+let c: bool = true
+let d: str = "hi"
+let e: entity = @a
+let f: selector = @e[type=zombie]
+let g: pos = ~ ~1 ~
+let h: vec3 = (0.5, 1.0, -0.2)
+let i: block = minecraft:chest[waterlogged=true]
+let j: item = minecraft:diamond_sword
+let k: team = "adventure"
+let l: tag = "boss"
+let m: nbt = {Health:10f}
+let n: list<num> = values
+let o: map<str, num> = storage
+let p: option<entity> = target
 
 ---
 
@@ -218,12 +218,12 @@ function definition
 ==================
 
 fn distance_multiplier(victim: entity) -> num {
-    return 2;
+    return 2
 }
 
 fn tick_handler() {
-    let base = 5;
-    return;
+    let base = 5
+    return
 }
 
 ---
@@ -257,11 +257,11 @@ if else chain
 ==================
 
 if counter >= 100 {
-    tellraw @a "reached";
+    tellraw @a "reached"
 } else if counter >= 50 {
-    tellraw @a "halfway";
+    tellraw @a "halfway"
 } else {
-    tellraw @a "keep going";
+    tellraw @a "keep going"
 }
 
 ---
@@ -309,11 +309,11 @@ for and while
 ==================
 
 for player in @a[gamemode=adventure] {
-    effect give $player minecraft:glowing 1 1;
+    effect give $player minecraft:glowing 1 1
 }
 
 while timer > 0 {
-    timer -= 1;
+    timer -= 1
 }
 
 ---
@@ -332,18 +332,18 @@ while timer > 0 {
         (command_statement
           (identifier)
           (command_argument
-            (identifier))
-          (command_argument
-            (variable_reference
-              (identifier)))
-          (command_argument
-            (namespaced_identifier
-              (identifier)
-              (identifier)))
-          (command_argument
-            (number))
-          (command_argument
-            (number))))))
+            (identifier)))
+        (expression_statement
+          (variable_reference
+            (identifier)))
+        (expression_statement
+          (namespaced_identifier
+            (identifier)
+            (identifier)))
+        (expression_statement
+          (number))
+        (expression_statement
+          (number)))))
   (item
     (while_statement
       (binary_expression
@@ -359,15 +359,15 @@ execute scope
 ==================
 
 execute at <@a> {
-    particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10;
+    particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10
 }
 
 execute as <@e[type=zombie,distance=..10]> {
-    tag @s add boss;
+    tag @s add boss
 }
 
 execute at <@a> as <@s> positioned ~ ~1 ~ {
-    say hi;
+    say hi
 }
 
 ---
@@ -380,27 +380,27 @@ execute at <@a> as <@s> positioned ~ ~1 ~ {
           (selector
             (selector_marker))))
       (block
-        (command_statement
-          (identifier)
-          (command_argument
-            (namespaced_identifier
-              (identifier)
-              (identifier)))
-          (command_argument
-            (position
-              (coordinate)
-              (coordinate)
-              (coordinate)))
-          (command_argument
-            (number))
-          (command_argument
-            (number))
-          (command_argument
-            (number))
-          (command_argument
-            (number))
-          (command_argument
-            (number))))))
+        (expression_statement
+          (identifier))
+        (expression_statement
+          (namespaced_identifier
+            (identifier)
+            (identifier)))
+        (expression_statement
+          (position
+            (coordinate)
+            (coordinate)
+            (coordinate)))
+        (expression_statement
+          (number))
+        (expression_statement
+          (number))
+        (expression_statement
+          (number))
+        (expression_statement
+          (number))
+        (expression_statement
+          (number)))))
   (item
     (execute_scope
       (execute_verb
@@ -421,9 +421,9 @@ execute at <@a> as <@s> positioned ~ ~1 ~ {
             (selector
               (selector_marker)))
           (command_argument
-            (identifier))
-          (command_argument
-            (identifier))))))
+            (identifier)))
+        (expression_statement
+          (identifier)))))
   (item
     (execute_scope
       (execute_verb
@@ -451,11 +451,11 @@ component
 
 component Spirit(name: str, effect: str) {
     tick(entity self) {
-        effect give $self $effect 1 1;
+        effect give $self $effect 1 1
     }
 }
 
-summon Spirit("Speed Spirit", "minecraft:speed");
+summon Spirit("Speed Spirit", "minecraft:speed")
 
 ---
 
@@ -483,17 +483,17 @@ summon Spirit("Speed Spirit", "minecraft:speed");
             (command_statement
               (identifier)
               (command_argument
-                (identifier))
-              (command_argument
-                (variable_reference
-                  (identifier)))
-              (command_argument
-                (variable_reference
-                  (identifier)))
-              (command_argument
-                (number))
-              (command_argument
-                (number))))))))
+                (identifier)))
+            (expression_statement
+              (variable_reference
+                (identifier)))
+            (expression_statement
+              (variable_reference
+                (identifier)))
+            (expression_statement
+              (number))
+            (expression_statement
+              (number)))))))
   (item
     (command_statement
       (identifier)
@@ -510,9 +510,9 @@ summon Spirit("Speed Spirit", "minecraft:speed");
 assignment
 ==================
 
-@s.score += 1;
-timer -= 1;
-counter = counter + 1;
+@s.score += 1
+timer -= 1
+counter = counter + 1
 
 ---
 
@@ -539,12 +539,12 @@ counter = counter + 1;
 commands
 ==================
 
-tellraw @s "combo x$comboCount!" (color: "red");
-effect give $player minecraft:glowing 1 1;
-tp $player ~ ~1 ~;
-give @p minecraft:diamond_sword 1;
-setblock 0 64 0 minecraft:chest[waterlogged=true];
-data merge block ~ ~ ~ { Health:10f };
+tellraw @s "combo x$comboCount!" (color: "red")
+effect give $player minecraft:glowing 1 1
+tp $player ~ ~1 ~
+give @p minecraft:diamond_sword 1
+setblock 0 64 0 minecraft:chest[waterlogged=true]
+data merge block ~ ~ ~ { Health:10f }
 
 ---
 
@@ -570,18 +570,22 @@ data merge block ~ ~ ~ { Health:10f };
     (command_statement
       (identifier)
       (command_argument
-        (identifier))
-      (command_argument
-        (variable_reference
-          (identifier)))
-      (command_argument
-        (namespaced_identifier
-          (identifier)
-          (identifier)))
-      (command_argument
-        (number))
-      (command_argument
-        (number))))
+        (identifier))))
+  (item
+    (expression_statement
+      (variable_reference
+        (identifier))))
+  (item
+    (expression_statement
+      (namespaced_identifier
+        (identifier)
+        (identifier))))
+  (item
+    (expression_statement
+      (number)))
+  (item
+    (expression_statement
+      (number)))
   (item
     (command_statement
       (identifier)
@@ -598,13 +602,15 @@ data merge block ~ ~ ~ { Health:10f };
       (identifier)
       (command_argument
         (selector
-          (selector_marker)))
-      (command_argument
-        (namespaced_identifier
-          (identifier)
-          (identifier)))
-      (command_argument
-        (number))))
+          (selector_marker)))))
+  (item
+    (expression_statement
+      (namespaced_identifier
+        (identifier)
+        (identifier))))
+  (item
+    (expression_statement
+      (number)))
   (item
     (command_statement
       (identifier)
@@ -641,20 +647,21 @@ data merge block ~ ~ ~ { Health:10f };
 call versus command
 ==================
 
-distance_multiplier(victim);
-distance_multiplier victim;
-summon Spirit("a", "b");
-particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10;
+distance_multiplier(victim)
+distance_multiplier victim
+summon Spirit("a", "b")
+particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10
 
 ---
 
 (source_file
   (item
     (expression_statement
-      (call_expression
-        (identifier)
-        (argument_list
-          (identifier)))))
+      (identifier)))
+  (item
+    (expression_statement
+      (parenthesized_expression
+        (identifier))))
   (item
     (command_statement
       (identifier)
@@ -672,37 +679,44 @@ particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10;
             (string
               (string_content)))))))
   (item
-    (command_statement
-      (identifier)
-      (command_argument
-        (namespaced_identifier
-          (identifier)
-          (identifier)))
-      (command_argument
-        (position
-          (coordinate)
-          (coordinate)
-          (coordinate)))
-      (command_argument
-        (number))
-      (command_argument
-        (number))
-      (command_argument
-        (number))
-      (command_argument
-        (number))
-      (command_argument
-        (number)))))
+    (expression_statement
+      (identifier)))
+  (item
+    (expression_statement
+      (namespaced_identifier
+        (identifier)
+        (identifier))))
+  (item
+    (expression_statement
+      (position
+        (coordinate)
+        (coordinate)
+        (coordinate))))
+  (item
+    (expression_statement
+      (number)))
+  (item
+    (expression_statement
+      (number)))
+  (item
+    (expression_statement
+      (number)))
+  (item
+    (expression_statement
+      (number)))
+  (item
+    (expression_statement
+      (number))))
 
 ==================
 selectors
 ==================
 
-@a[gamemode=adventure];
-@e[type=zombie,distance=..10];
-@e[type=creeper,name="Bob"];
-@a[tag=boss];
-@e[type=zombie,limit=1];
+@a[gamemode=adventure]
+@e[type=zombie,distance=..10]
+@e[type=creeper,name="Bob"]
+@a[tag=boss]
+@e[type=zombie,limit=1]
 
 ---
 
@@ -762,12 +776,12 @@ selectors
 strings and interpolation
 ==================
 
-tellraw @s "combo x$comboCount!";
-tellraw @s "current: ${comboCount}";
-tellraw @s "total: ${comboCount * 10}";
-tellraw @s "${a}${b}${c}";
-tellraw @s "escaped \$dollar and \"quote\"";
-effect give $player minecraft:glowing 1 1;
+tellraw @s "combo x$comboCount!"
+tellraw @s "current: ${comboCount}"
+tellraw @s "total: ${comboCount * 10}"
+tellraw @s "${a}${b}${c}"
+tellraw @s "escaped \$dollar and \"quote\""
+effect give $player minecraft:glowing 1 1
 
 ---
 
@@ -840,28 +854,32 @@ effect give $player minecraft:glowing 1 1;
     (command_statement
       (identifier)
       (command_argument
-        (identifier))
-      (command_argument
-        (variable_reference
-          (identifier)))
-      (command_argument
-        (namespaced_identifier
-          (identifier)
-          (identifier)))
-      (command_argument
-        (number))
-      (command_argument
-        (number)))))
+        (identifier))))
+  (item
+    (expression_statement
+      (variable_reference
+        (identifier))))
+  (item
+    (expression_statement
+      (namespaced_identifier
+        (identifier)
+        (identifier))))
+  (item
+    (expression_statement
+      (number)))
+  (item
+    (expression_statement
+      (number))))
 
 ==================
 expressions
 ==================
 
-let x = a + b * c - d / e % f;
-let y = a < b && b > c || !d;
-let z = (a + b) * (c - d);
-let w = -3 + +4;
-let v = obj.field.nested;
+let x = a + b * c - d / e % f
+let y = a < b && b > c || !d
+let z = (a + b) * (c - d)
+let w = -3 + +4
+let v = obj.field.nested
 
 ---
 
@@ -928,15 +946,16 @@ contextual keywords
 
 component C() {
     tick(entity self) {
-        tellraw @s "tick";
+        tellraw @s "tick"
     }
 }
 
-tick freeze;
-tick rate 20;
-return run say hi;
+tick freeze
+tick rate 20
+return run say hi
+
 fn f() {
-    return 1;
+    return 1
 }
 
 ---
@@ -971,16 +990,18 @@ fn f() {
     (command_statement
       (identifier)
       (command_argument
-        (identifier))
-      (command_argument
-        (number))))
+        (identifier))))
+  (item
+    (expression_statement
+      (number)))
   (item
     (command_statement
       (identifier)
       (command_argument
-        (identifier))
-      (command_argument
-        (identifier))
+        (identifier))))
+  (item
+    (command_statement
+      (identifier)
       (command_argument
         (identifier))))
   (item
@@ -995,10 +1016,10 @@ fn f() {
 wildcard and underscore names
 ==================
 
-let _ = f();
-let _unused = 1;
+let _ = f()
+let _unused = 1
 fn _private() {
-    let _ = g();
+    let _ = g()
 }
 
 ---
@@ -1032,7 +1053,7 @@ comments
 // a line comment
 /* a block comment */
 /** a doc comment */
-let x = 1; // trailing comment
+let x = 1 // trailing comment
 
 ---
 

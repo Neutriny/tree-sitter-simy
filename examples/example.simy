@@ -1,57 +1,57 @@
 // Simy example — every construct in one file.
 
-const MAX_HEALTH = 20;
+const MAX_HEALTH = 20
 
 fn distance_multiplier(victim: entity) -> num {
-    return 2;
+    return 2
 }
 
 fn calculate_damage(attacker: entity, victim: entity) -> num {
-    let baseDamage = 5;
-    let damage = baseDamage * distance_multiplier(victim);
-    return damage;
+    let baseDamage = 5
+    let damage = baseDamage * distance_multiplier(victim)
+    return damage
 }
 
 fn tick_handler() {
     if counter >= 100 {
-        tellraw @a "reached!";
+        tellraw @a "reached!"
     } else if counter >= 50 {
-        tellraw @a "keep going";
+        tellraw @a "keep going"
     } else {
-        tellraw @a "start";
+        tellraw @a "start"
     }
 
     for player in @a[gamemode=adventure] {
-        effect give $player minecraft:glowing 1 1;
+        effect give $player minecraft:glowing 1 1
     }
 
     execute at <@a> {
-        particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10;
+        particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10
     }
 
     execute as <@e[type=zombie,distance=..10]> {
-        tag @s add boss;
+        tag @s add boss
     }
 }
 
 component Spirit(name: str, effect: str) {
     tick(entity self) {
-        effect give $self $effect 1 1;
+        effect give $self $effect 1 1
     }
 }
 
-let mut timer = 0;
-let velocity: vec3 = (0.5, 1.0, -0.2);
-let spot: pos = ~ ~1 ~;
-let _ = calculate_damage(@p, @e[type=zombie,limit=1]);
+let mut timer = 0
+let velocity: vec3 = (0.5, 1.0, -0.2)
+let spot: pos = ~ ~1 ~
+let _ = calculate_damage(@p, @e[type=zombie,limit=1])
 
-summon Spirit("Speed Spirit", "minecraft:speed");
-@s.score += 1;
-give @p minecraft:diamond_sword 1;
-setblock 0 64 0 minecraft:chest[waterlogged=true];
-data merge block ~ ~ ~ { Health:10f, Items:[{id:"minecraft:stone"}] };
+summon Spirit("Speed Spirit", "minecraft:speed")
+@s.score += 1
+give @p minecraft:diamond_sword 1
+setblock 0 64 0 minecraft:chest[waterlogged=true]
+data merge block ~ ~ ~ { Health:10f, Items:[{id:"minecraft:stone"}] }
 
-tellraw @s "combo x$comboCount!" (color: "red");
-tellraw @s "current: ${comboCount}";
-tellraw @s "total: ${comboCount * 10}";
-tellraw @s "${a}${b}${c}";
+tellraw @s "combo x$comboCount!" (color: "red")
+tellraw @s "current: ${comboCount}"
+tellraw @s "total: ${comboCount * 10}"
+tellraw @s "${a}${b}${c}"

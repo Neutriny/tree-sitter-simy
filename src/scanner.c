@@ -42,10 +42,11 @@ bool tree_sitter_simy_external_scanner_scan(void *payload, TSLexer *lexer,
     return false;
   }
 
-  // External scanners are invoked before extras (whitespace) are skipped,
-  // so consume leading whitespace here.
+  // External scanners are invoked before extras (whitespace) are skipped, so
+  // consume leading spaces/tabs here. Newlines are significant (statement
+  // terminators) and must NOT be consumed.
   while (lexer->lookahead == ' ' || lexer->lookahead == '\t' ||
-         lexer->lookahead == '\n' || lexer->lookahead == '\r') {
+         lexer->lookahead == '\r') {
     lexer->advance(lexer, true);
   }
 

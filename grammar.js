@@ -30,7 +30,8 @@ function commaSep(rule) {
 module.exports = grammar({
   name: 'simy',
 
-  extras: $ => [/\s/, $.line_comment, $.block_comment],
+  // Newlines are significant (statement terminators), so they are NOT extras.
+  extras: $ => [/[ \t\r]/, $.line_comment, $.block_comment],
 
   // Makes keyword tokens win over `identifier` in ambiguous states.
   word: $ => $.identifier,
@@ -41,8 +42,12 @@ module.exports = grammar({
   externals: $ => [$.nbt],
 
   conflicts: $ => [
-    [$.command_statement, $._callable],
+    [$.command_statement, $._primary, $._callable],
+    [$.return_statement],
+    [$.command_statement],
     [$.command_statement, $._primary],
+    [$._expression, $._callable],
+    [$._primary, $._callable],
     [$.command_argument, $._primary],
     [$.command_argument, $._expression],
     [$.command_argument, $._callable],
@@ -53,7 +58,12 @@ module.exports = grammar({
   ],
 
   rules: {
-    source_file: $ => repeat($.item),
+    // Statements are newline-terminated (Go-style): `\n` is excluded from
+    // `extras` and matched explicitly via `_nl`. Newlines separate statements
+    // (and terminate commands); blank lines are allowed.
+    source_file: $ => repeat(choice($._nl, $.item)),
+
+    _nl: _ => /\n+/,
 
     item: $ => choice(
       $.function_definition,
@@ -64,12 +74,12 @@ module.exports = grammar({
     // ─────────────────────────────── declarations ───────────────────────────
     const_declaration: $ => seq(
       'const', field('name', $._binding), '=',
-      field('value', $._expression), ';'),
+      field('value', $._expression)),
 
     let_declaration: $ => seq(
       'let', optional('mut'), field('name', $._binding),
       optional($.type_annotation), '=',
-      field('value', $._expression), ';'),
+      field('value', $._expression)),
 
     function_definition: $ => seq(
       'fn', field('name', $.identifier),
@@ -91,7 +101,8 @@ module.exports = grammar({
       field('parameters', $.parameter_list),
       field('body', $.component_body)),
 
-    component_body: $ => seq('{', repeat($.component_method), '}'),
+    component_body: $ => seq(
+      '{', repeat(choice($._nl, $.component_method)), '}'),
 
     component_method: $ => seq(
       'tick', field('parameters', $.method_parameter_list), field('body', $.block)),
@@ -138,7 +149,8 @@ module.exports = grammar({
       $._module_statement,
       $.return_statement),
 
-    block: $ => seq('{', repeat($._block_statement), '}'),
+    block: $ => seq(
+      '{', repeat(choice($._nl, $._block_statement)), '}'),
 
     if_statement: $ => seq(
       'if', field('condition', $._expression), field('consequence', $.block),
@@ -153,7 +165,7 @@ module.exports = grammar({
     while_statement: $ => seq(
       'while', field('condition', $._expression), field('body', $.block)),
 
-    return_statement: $ => seq('return', optional($._expression), ';'),
+    return_statement: $ => seq('return', optional($._expression)),
 
     // Structured replacement for native `execute` nesting.
     execute_scope: $ => seq(
@@ -171,17 +183,15 @@ module.exports = grammar({
     assignment_statement: $ => prec.right(PREC.assign, seq(
       field('target', $._expression),
       field('operator', choice('=', '+=', '-=', '*=', '/=', '%=')),
-      field('value', $._expression),
-      ';')),
+      field('value', $._expression))),
 
-    expression_statement: $ => seq($._expression, ';'),
+    expression_statement: $ => $._expression,
 
     // ─────────────────────────────── commands ───────────────────────────────
     command_statement: $ => seq(
       field('name', $.identifier),
       repeat1($.command_argument),
-      optional($.argument_block),
-      ';'),
+      optional($.argument_block)),
 
     // Deliberately excludes anything starting with `(`, so that `foo(a)` is
     // always a call and `foo a b` is always a command.
