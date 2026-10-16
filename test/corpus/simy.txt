@@ -1,0 +1,1047 @@
+==================
+declarations
+==================
+
+const MAX_HEALTH = 20;
+let damage = 10;
+let mut timer = 0;
+let target: entity = @e[type=creeper];
+let _ = compute();
+
+---
+
+(source_file
+  (item
+    (const_declaration
+      (identifier)
+      (number)))
+  (item
+    (let_declaration
+      (identifier)
+      (number)))
+  (item
+    (let_declaration
+      (identifier)
+      (number)))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (domain_type)))
+      (selector
+        (selector_marker)
+        (selector_arguments
+          (selector_argument
+            (identifier)
+            (identifier))))))
+  (item
+    (let_declaration
+      (wildcard)
+      (call_expression
+        (identifier)
+        (argument_list)))))
+
+==================
+types
+==================
+
+let a: num = 1;
+let b: float = 1.5;
+let c: bool = true;
+let d: str = "hi";
+let e: entity = @a;
+let f: selector = @e[type=zombie];
+let g: pos = ~ ~1 ~;
+let h: vec3 = (0.5, 1.0, -0.2);
+let i: block = minecraft:chest[waterlogged=true];
+let j: item = minecraft:diamond_sword;
+let k: team = "adventure";
+let l: tag = "boss";
+let m: nbt = {Health:10f};
+let n: list<num> = values;
+let o: map<str, num> = storage;
+let p: option<entity> = target;
+
+---
+
+(source_file
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (primitive_type)))
+      (number)))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (primitive_type)))
+      (number)))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (primitive_type)))
+      (boolean)))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (primitive_type)))
+      (string
+        (string_content))))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (domain_type)))
+      (selector
+        (selector_marker))))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (domain_type)))
+      (selector
+        (selector_marker)
+        (selector_arguments
+          (selector_argument
+            (identifier)
+            (identifier))))))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (domain_type)))
+      (position
+        (coordinate)
+        (coordinate)
+        (coordinate))))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (domain_type)))
+      (vector
+        (number)
+        (number)
+        (number))))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (domain_type)))
+      (block_literal
+        (namespaced_identifier
+          (identifier)
+          (identifier))
+        (block_state
+          (identifier)
+          (boolean)))))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (domain_type)))
+      (namespaced_identifier
+        (identifier)
+        (identifier))))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (domain_type)))
+      (string
+        (string_content))))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (domain_type)))
+      (string
+        (string_content))))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (domain_type)))
+      (nbt)))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (generic_type
+            (identifier)
+            (type
+              (primitive_type)))))
+      (identifier)))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (generic_type
+            (identifier)
+            (type
+              (primitive_type))
+            (type
+              (primitive_type)))))
+      (identifier)))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (generic_type
+            (identifier)
+            (type
+              (domain_type)))))
+      (identifier))))
+
+==================
+function definition
+==================
+
+fn distance_multiplier(victim: entity) -> num {
+    return 2;
+}
+
+fn tick_handler() {
+    let base = 5;
+    return;
+}
+
+---
+
+(source_file
+  (item
+    (function_definition
+      (identifier)
+      (parameter_list
+        (parameter
+          (identifier)
+          (type
+            (domain_type))))
+      (type
+        (primitive_type))
+      (block
+        (return_statement
+          (number)))))
+  (item
+    (function_definition
+      (identifier)
+      (parameter_list)
+      (block
+        (let_declaration
+          (identifier)
+          (number))
+        (return_statement)))))
+
+==================
+if else chain
+==================
+
+if counter >= 100 {
+    tellraw @a "reached";
+} else if counter >= 50 {
+    tellraw @a "halfway";
+} else {
+    tellraw @a "keep going";
+}
+
+---
+
+(source_file
+  (item
+    (if_statement
+      (binary_expression
+        (identifier)
+        (number))
+      (block
+        (command_statement
+          (identifier)
+          (command_argument
+            (selector
+              (selector_marker)))
+          (command_argument
+            (string
+              (string_content)))))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (number))
+        (block
+          (command_statement
+            (identifier)
+            (command_argument
+              (selector
+                (selector_marker)))
+            (command_argument
+              (string
+                (string_content)))))
+        (block
+          (command_statement
+            (identifier)
+            (command_argument
+              (selector
+                (selector_marker)))
+            (command_argument
+              (string
+                (string_content)))))))))
+
+==================
+for and while
+==================
+
+for player in @a[gamemode=adventure] {
+    effect give $player minecraft:glowing 1 1;
+}
+
+while timer > 0 {
+    timer -= 1;
+}
+
+---
+
+(source_file
+  (item
+    (for_statement
+      (identifier)
+      (selector
+        (selector_marker)
+        (selector_arguments
+          (selector_argument
+            (identifier)
+            (identifier))))
+      (block
+        (command_statement
+          (identifier)
+          (command_argument
+            (identifier))
+          (command_argument
+            (variable_reference
+              (identifier)))
+          (command_argument
+            (namespaced_identifier
+              (identifier)
+              (identifier)))
+          (command_argument
+            (number))
+          (command_argument
+            (number))))))
+  (item
+    (while_statement
+      (binary_expression
+        (identifier)
+        (number))
+      (block
+        (assignment_statement
+          (identifier)
+          (number))))))
+
+==================
+execute scope
+==================
+
+execute at <@a> {
+    particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10;
+}
+
+execute as <@e[type=zombie,distance=..10]> {
+    tag @s add boss;
+}
+
+execute at <@a> as <@s> positioned ~ ~1 ~ {
+    say hi;
+}
+
+---
+
+(source_file
+  (item
+    (execute_scope
+      (execute_verb
+        (scope_target
+          (selector
+            (selector_marker))))
+      (block
+        (command_statement
+          (identifier)
+          (command_argument
+            (namespaced_identifier
+              (identifier)
+              (identifier)))
+          (command_argument
+            (position
+              (coordinate)
+              (coordinate)
+              (coordinate)))
+          (command_argument
+            (number))
+          (command_argument
+            (number))
+          (command_argument
+            (number))
+          (command_argument
+            (number))
+          (command_argument
+            (number))))))
+  (item
+    (execute_scope
+      (execute_verb
+        (scope_target
+          (selector
+            (selector_marker)
+            (selector_arguments
+              (selector_argument
+                (identifier)
+                (identifier))
+              (selector_argument
+                (identifier)
+                (range))))))
+      (block
+        (command_statement
+          (identifier)
+          (command_argument
+            (selector
+              (selector_marker)))
+          (command_argument
+            (identifier))
+          (command_argument
+            (identifier))))))
+  (item
+    (execute_scope
+      (execute_verb
+        (scope_target
+          (selector
+            (selector_marker))))
+      (execute_verb
+        (scope_target
+          (selector
+            (selector_marker))))
+      (execute_verb
+        (position
+          (coordinate)
+          (coordinate)
+          (coordinate)))
+      (block
+        (command_statement
+          (identifier)
+          (command_argument
+            (identifier)))))))
+
+==================
+component
+==================
+
+component Spirit(name: str, effect: str) {
+    tick(entity self) {
+        effect give $self $effect 1 1;
+    }
+}
+
+summon Spirit("Speed Spirit", "minecraft:speed");
+
+---
+
+(source_file
+  (item
+    (component_definition
+      (identifier)
+      (parameter_list
+        (parameter
+          (identifier)
+          (type
+            (primitive_type)))
+        (parameter
+          (identifier)
+          (type
+            (primitive_type))))
+      (component_body
+        (component_method
+          (method_parameter_list
+            (method_parameter
+              (type
+                (domain_type))
+              (identifier)))
+          (block
+            (command_statement
+              (identifier)
+              (command_argument
+                (identifier))
+              (command_argument
+                (variable_reference
+                  (identifier)))
+              (command_argument
+                (variable_reference
+                  (identifier)))
+              (command_argument
+                (number))
+              (command_argument
+                (number))))))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (call_expression
+          (identifier)
+          (argument_list
+            (string
+              (string_content))
+            (string
+              (string_content))))))))
+
+==================
+assignment
+==================
+
+@s.score += 1;
+timer -= 1;
+counter = counter + 1;
+
+---
+
+(source_file
+  (item
+    (assignment_statement
+      (member_expression
+        (selector
+          (selector_marker))
+        (identifier))
+      (number)))
+  (item
+    (assignment_statement
+      (identifier)
+      (number)))
+  (item
+    (assignment_statement
+      (identifier)
+      (binary_expression
+        (identifier)
+        (number)))))
+
+==================
+commands
+==================
+
+tellraw @s "combo x$comboCount!" (color: "red");
+effect give $player minecraft:glowing 1 1;
+tp $player ~ ~1 ~;
+give @p minecraft:diamond_sword 1;
+setblock 0 64 0 minecraft:chest[waterlogged=true];
+data merge block ~ ~ ~ { Health:10f };
+
+---
+
+(source_file
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (selector
+          (selector_marker)))
+      (command_argument
+        (string
+          (string_content)
+          (interpolation
+            (identifier))
+          (string_content)))
+      (argument_block
+        (named_argument
+          (identifier)
+          (string
+            (string_content))))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (identifier))
+      (command_argument
+        (variable_reference
+          (identifier)))
+      (command_argument
+        (namespaced_identifier
+          (identifier)
+          (identifier)))
+      (command_argument
+        (number))
+      (command_argument
+        (number))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (variable_reference
+          (identifier)))
+      (command_argument
+        (position
+          (coordinate)
+          (coordinate)
+          (coordinate)))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (selector
+          (selector_marker)))
+      (command_argument
+        (namespaced_identifier
+          (identifier)
+          (identifier)))
+      (command_argument
+        (number))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (number))
+      (command_argument
+        (number))
+      (command_argument
+        (number))
+      (command_argument
+        (block_literal
+          (namespaced_identifier
+            (identifier)
+            (identifier))
+          (block_state
+            (identifier)
+            (boolean))))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (identifier))
+      (command_argument
+        (identifier))
+      (command_argument
+        (position
+          (coordinate)
+          (coordinate)
+          (coordinate)))
+      (command_argument
+        (nbt)))))
+
+==================
+call versus command
+==================
+
+distance_multiplier(victim);
+distance_multiplier victim;
+summon Spirit("a", "b");
+particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10;
+
+---
+
+(source_file
+  (item
+    (expression_statement
+      (call_expression
+        (identifier)
+        (argument_list
+          (identifier)))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (identifier))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (call_expression
+          (identifier)
+          (argument_list
+            (string
+              (string_content))
+            (string
+              (string_content)))))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (namespaced_identifier
+          (identifier)
+          (identifier)))
+      (command_argument
+        (position
+          (coordinate)
+          (coordinate)
+          (coordinate)))
+      (command_argument
+        (number))
+      (command_argument
+        (number))
+      (command_argument
+        (number))
+      (command_argument
+        (number))
+      (command_argument
+        (number)))))
+
+==================
+selectors
+==================
+
+@a[gamemode=adventure];
+@e[type=zombie,distance=..10];
+@e[type=creeper,name="Bob"];
+@a[tag=boss];
+@e[type=zombie,limit=1];
+
+---
+
+(source_file
+  (item
+    (expression_statement
+      (selector
+        (selector_marker)
+        (selector_arguments
+          (selector_argument
+            (identifier)
+            (identifier))))))
+  (item
+    (expression_statement
+      (selector
+        (selector_marker)
+        (selector_arguments
+          (selector_argument
+            (identifier)
+            (identifier))
+          (selector_argument
+            (identifier)
+            (range))))))
+  (item
+    (expression_statement
+      (selector
+        (selector_marker)
+        (selector_arguments
+          (selector_argument
+            (identifier)
+            (identifier))
+          (selector_argument
+            (identifier)
+            (string
+              (string_content)))))))
+  (item
+    (expression_statement
+      (selector
+        (selector_marker)
+        (selector_arguments
+          (selector_argument
+            (identifier)
+            (identifier))))))
+  (item
+    (expression_statement
+      (selector
+        (selector_marker)
+        (selector_arguments
+          (selector_argument
+            (identifier)
+            (identifier))
+          (selector_argument
+            (identifier)
+            (number)))))))
+
+==================
+strings and interpolation
+==================
+
+tellraw @s "combo x$comboCount!";
+tellraw @s "current: ${comboCount}";
+tellraw @s "total: ${comboCount * 10}";
+tellraw @s "${a}${b}${c}";
+tellraw @s "escaped \$dollar and \"quote\"";
+effect give $player minecraft:glowing 1 1;
+
+---
+
+(source_file
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (selector
+          (selector_marker)))
+      (command_argument
+        (string
+          (string_content)
+          (interpolation
+            (identifier))
+          (string_content)))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (selector
+          (selector_marker)))
+      (command_argument
+        (string
+          (string_content)
+          (interpolation
+            (identifier))))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (selector
+          (selector_marker)))
+      (command_argument
+        (string
+          (string_content)
+          (interpolation
+            (binary_expression
+              (identifier)
+              (number)))))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (selector
+          (selector_marker)))
+      (command_argument
+        (string
+          (interpolation
+            (identifier))
+          (interpolation
+            (identifier))
+          (interpolation
+            (identifier))))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (selector
+          (selector_marker)))
+      (command_argument
+        (string
+          (string_content)
+          (escape_sequence)
+          (string_content)
+          (escape_sequence)
+          (string_content)
+          (escape_sequence)))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (identifier))
+      (command_argument
+        (variable_reference
+          (identifier)))
+      (command_argument
+        (namespaced_identifier
+          (identifier)
+          (identifier)))
+      (command_argument
+        (number))
+      (command_argument
+        (number)))))
+
+==================
+expressions
+==================
+
+let x = a + b * c - d / e % f;
+let y = a < b && b > c || !d;
+let z = (a + b) * (c - d);
+let w = -3 + +4;
+let v = obj.field.nested;
+
+---
+
+(source_file
+  (item
+    (let_declaration
+      (identifier)
+      (binary_expression
+        (binary_expression
+          (identifier)
+          (binary_expression
+            (identifier)
+            (identifier)))
+        (binary_expression
+          (binary_expression
+            (identifier)
+            (identifier))
+          (identifier)))))
+  (item
+    (let_declaration
+      (identifier)
+      (binary_expression
+        (binary_expression
+          (binary_expression
+            (identifier)
+            (identifier))
+          (binary_expression
+            (identifier)
+            (identifier)))
+        (unary_expression
+          (identifier)))))
+  (item
+    (let_declaration
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (identifier)))
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (identifier))))))
+  (item
+    (let_declaration
+      (identifier)
+      (binary_expression
+        (unary_expression
+          (number))
+        (unary_expression
+          (number)))))
+  (item
+    (let_declaration
+      (identifier)
+      (member_expression
+        (member_expression
+          (identifier)
+          (identifier))
+        (identifier)))))
+
+==================
+contextual keywords
+==================
+
+component C() {
+    tick(entity self) {
+        tellraw @s "tick";
+    }
+}
+
+tick freeze;
+tick rate 20;
+return run say hi;
+fn f() {
+    return 1;
+}
+
+---
+
+(source_file
+  (item
+    (component_definition
+      (identifier)
+      (parameter_list)
+      (component_body
+        (component_method
+          (method_parameter_list
+            (method_parameter
+              (type
+                (domain_type))
+              (identifier)))
+          (block
+            (command_statement
+              (identifier)
+              (command_argument
+                (selector
+                  (selector_marker)))
+              (command_argument
+                (string
+                  (string_content)))))))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (identifier))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (identifier))
+      (command_argument
+        (number))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (identifier))
+      (command_argument
+        (identifier))
+      (command_argument
+        (identifier))))
+  (item
+    (function_definition
+      (identifier)
+      (parameter_list)
+      (block
+        (return_statement
+          (number))))))
+
+==================
+wildcard and underscore names
+==================
+
+let _ = f();
+let _unused = 1;
+fn _private() {
+    let _ = g();
+}
+
+---
+
+(source_file
+  (item
+    (let_declaration
+      (wildcard)
+      (call_expression
+        (identifier)
+        (argument_list))))
+  (item
+    (let_declaration
+      (identifier)
+      (number)))
+  (item
+    (function_definition
+      (identifier)
+      (parameter_list)
+      (block
+        (let_declaration
+          (wildcard)
+          (call_expression
+            (identifier)
+            (argument_list)))))))
+
+==================
+comments
+==================
+
+// a line comment
+/* a block comment */
+/** a doc comment */
+let x = 1; // trailing comment
+
+---
+
+(source_file
+  (line_comment)
+  (block_comment)
+  (block_comment)
+  (item
+    (let_declaration
+      (identifier)
+      (number)))
+  (line_comment))

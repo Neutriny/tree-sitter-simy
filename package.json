@@ -1,0 +1,27 @@
+{
+  "name": "tree-sitter-simy",
+  "version": "0.1.0",
+  "description": "Simy grammar for tree-sitter",
+  "repository": "https://github.com/Neutriny/tree-sitter-simy",
+  "license": "MIT",
+  "keywords": [
+    "parser",
+    "tree-sitter",
+    "simy",
+    "minecraft"
+  ],
+  "files": [
+    "grammar.js",
+    "queries",
+    "src/**",
+    "tree-sitter.json"
+  ],
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test",
+    "parse": "tree-sitter parse"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.27.1"
+  }
+}
