@@ -258,7 +258,7 @@ if else chain
 
 if counter >= 100 {
     tellraw @a "reached"
-} else if counter >= 50 {
+} elif counter >= 50 {
     tellraw @a "halfway"
 } else {
     tellraw @a "keep going"
@@ -281,7 +281,7 @@ if counter >= 100 {
           (command_argument
             (string
               (string_content)))))
-      (if_statement
+      (elif_clause
         (binary_expression
           (identifier)
           (number))
@@ -293,7 +293,8 @@ if counter >= 100 {
                 (selector_marker)))
             (command_argument
               (string
-                (string_content)))))
+                (string_content))))))
+      (else_clause
         (block
           (command_statement
             (identifier)

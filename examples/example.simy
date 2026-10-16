@@ -15,7 +15,7 @@ fn calculate_damage(attacker: entity, victim: entity) -> num {
 fn tick_handler() {
     if counter >= 100 {
         tellraw @a "reached!"
-    } else if counter >= 50 {
+    } elif counter >= 50 {
         tellraw @a "keep going"
     } else {
         tellraw @a "start"

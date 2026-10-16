@@ -885,6 +885,108 @@
     "fields": {}
   },
   {
+    "type": "elif_clause",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      },
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "block_literal",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "member_expression",
+            "named": true
+          },
+          {
+            "type": "namespaced_identifier",
+            "named": true
+          },
+          {
+            "type": "nbt",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "position",
+            "named": true
+          },
+          {
+            "type": "selector",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "variable_reference",
+            "named": true
+          },
+          {
+            "type": "vector",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "else_clause",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "execute_scope",
     "named": true,
     "fields": {
@@ -1187,20 +1289,6 @@
     "type": "if_statement",
     "named": true,
     "fields": {
-      "alternative": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "block",
-            "named": true
-          },
-          {
-            "type": "if_statement",
-            "named": true
-          }
-        ]
-      },
       "condition": {
         "multiple": false,
         "required": true,
@@ -1281,6 +1369,20 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "elif_clause",
+          "named": true
+        },
+        {
+          "type": "else_clause",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2584,6 +2686,10 @@
   {
     "type": "coordinate",
     "named": true
+  },
+  {
+    "type": "elif",
+    "named": false
   },
   {
     "type": "else",

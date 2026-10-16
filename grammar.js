@@ -156,9 +156,13 @@ module.exports = grammar({
 
     if_statement: $ => seq(
       'if', field('condition', $._expression), field('consequence', $.block),
-      optional(seq(
-        'else',
-        field('alternative', choice($.if_statement, $.block))))),
+      repeat($.elif_clause),
+      optional($.else_clause)),
+
+    elif_clause: $ => seq(
+      'elif', field('condition', $._expression), field('body', $.block)),
+
+    else_clause: $ => seq('else', field('body', $.block)),
 
     for_statement: $ => seq(
       'for', field('variable', $._binding), 'in',
