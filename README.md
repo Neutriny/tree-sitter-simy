@@ -67,7 +67,7 @@ examples/           example .simy files
 
 | Repository | Role |
 | :--- | :--- |
-| **[simy](https://github.com/Neutriny/simy)** | Compiler and CLI |
+| **[simy](https://github.com/Neutriny/Simy)** | Compiler and CLI |
 | **[zed-simy](https://github.com/Neutriny/zed-simy)** | Zed editor extension |
 
 ## License

@@ -64,7 +64,7 @@ examples/           示例 .simy 文件
 
 | 仓库 | 作用 |
 | :--- | :--- |
-| **[simy](https://github.com/Neutriny/simy)** | 编译器与 CLI |
+| **[simy](https://github.com/Neutriny/Simy)** | 编译器与 CLI |
 | **[zed-simy](https://github.com/Neutriny/zed-simy)** | Zed 编辑器扩展 |
 
 ## 许可证
