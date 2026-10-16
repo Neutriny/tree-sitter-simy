@@ -5,7 +5,8 @@
 > 面向 **Simy**（Minecraft 数据包开发 DSL）的 Tree-sitter 语法。
 
 本语法是 **Simy 语法的唯一事实源** —— 编译器与编辑器扩展都消费它。
-参见[语言参考](https://github.com/Neutriny/zed-simy/blob/main/docs/syntax.zh-CN.md)。
+参见[语言参考](https://github.com/Neutriny/zed-simy/blob/main/docs/syntax.zh-CN.md)（简体中文）
+/ [language reference](https://github.com/Neutriny/zed-simy/blob/main/docs/syntax.md)（English）。
 
 ## 覆盖范围
 

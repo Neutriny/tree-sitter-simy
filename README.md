@@ -6,7 +6,8 @@
 
 This grammar is the **single source of truth for Simy syntax** — the compiler and the
 editor extension both consume it. See the
-[language reference](https://github.com/Neutriny/zed-simy/blob/main/docs/syntax.md).
+[language reference](https://github.com/Neutriny/zed-simy/blob/main/docs/syntax.md) (English)
+/ [语法参考](https://github.com/Neutriny/zed-simy/blob/main/docs/syntax.zh-CN.md) (简体中文).
 
 ## What it covers
 
