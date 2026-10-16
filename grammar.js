@@ -30,8 +30,12 @@ function commaSep(rule) {
 module.exports = grammar({
   name: 'simy',
 
-  // Newlines are significant (statement terminators), so they are NOT extras.
-  extras: $ => [/[ \t\r]/, $.line_comment, $.block_comment],
+  // Newlines are significant as statement terminators, but they are handled by
+  // the external scanner (`_newline`), not here. Because `\s` still includes
+  // `\n`, any newline that is not a statement terminator (i.e. inside `()`,
+  // `[]`, `<>` or `{}`) is skipped as an extra — this gives implicit line
+  // joining inside brackets, exactly like Python.
+  extras: $ => [/\s/, $.line_comment, $.block_comment],
 
   // Makes keyword tokens win over `identifier` in ambiguous states.
   word: $ => $.identifier,
@@ -39,7 +43,7 @@ module.exports = grammar({
   // The NBT escape hatch is scanned by an external scanner so that balanced
   // braces (including nested compounds/lists and quoted strings) are captured
   // as a single token instead of colliding with block `{ ... }`.
-  externals: $ => [$.nbt],
+  externals: $ => [$.nbt, $._newline],
 
   conflicts: $ => [
     [$.command_statement, $._primary, $._callable],
@@ -58,12 +62,10 @@ module.exports = grammar({
   ],
 
   rules: {
-    // Statements are newline-terminated (Go-style): `\n` is excluded from
-    // `extras` and matched explicitly via `_nl`. Newlines separate statements
-    // (and terminate commands); blank lines are allowed.
-    source_file: $ => repeat(choice($._nl, $.item)),
-
-    _nl: _ => /\n+/,
+    // Statements are newline-terminated (Go-style). `_newline` is an external
+    // token emitted by the scanner; it is not valid inside brackets, so
+    // newlines there are skipped as whitespace (implicit line joining).
+    source_file: $ => repeat(choice($._newline, $.item)),
 
     item: $ => choice(
       $.function_definition,
@@ -102,7 +104,7 @@ module.exports = grammar({
       field('body', $.component_body)),
 
     component_body: $ => seq(
-      '{', repeat(choice($._nl, $.component_method)), '}'),
+      '{', repeat(choice($._newline, $.component_method)), '}'),
 
     component_method: $ => seq(
       'tick', field('parameters', $.method_parameter_list), field('body', $.block)),
@@ -150,7 +152,7 @@ module.exports = grammar({
       $.return_statement),
 
     block: $ => seq(
-      '{', repeat(choice($._nl, $._block_statement)), '}'),
+      '{', repeat(choice($._newline, $._block_statement)), '}'),
 
     if_statement: $ => seq(
       'if', field('condition', $._expression), field('consequence', $.block),

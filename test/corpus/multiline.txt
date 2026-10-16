@@ -1,0 +1,115 @@
+==================
+multiline delimiters
+==================
+
+fn calculate_damage(
+    attacker: entity,
+    victim: entity,
+) -> num {
+    return apply_damage(
+        attacker,
+        victim,
+        multiplier(victim)
+    )
+}
+
+let zombies = @e[
+    type=zombie,
+    distance=..10,
+    limit=5
+]
+
+let v: vec3 = (
+    0.5,
+    1.0,
+    -0.2
+)
+
+execute at <
+    @a
+> {
+    say hi
+}
+
+tellraw @s "hi" (
+    color: "red"
+)
+
+---
+
+(source_file
+  (item
+    (function_definition
+      (identifier)
+      (parameter_list
+        (parameter
+          (identifier)
+          (type
+            (domain_type)))
+        (parameter
+          (identifier)
+          (type
+            (domain_type))))
+      (type
+        (primitive_type))
+      (block
+        (return_statement
+          (call_expression
+            (identifier)
+            (argument_list
+              (identifier)
+              (identifier)
+              (call_expression
+                (identifier)
+                (argument_list
+                  (identifier)))))))))
+  (item
+    (let_declaration
+      (identifier)
+      (selector
+        (selector_marker)
+        (selector_arguments
+          (selector_argument
+            (identifier)
+            (identifier))
+          (selector_argument
+            (identifier)
+            (range))
+          (selector_argument
+            (identifier)
+            (number))))))
+  (item
+    (let_declaration
+      (identifier)
+      (type_annotation
+        (type
+          (domain_type)))
+      (vector
+        (number)
+        (number)
+        (number))))
+  (item
+    (execute_scope
+      (execute_verb
+        (scope_target
+          (selector
+            (selector_marker))))
+      (block
+        (command_statement
+          (identifier)
+          (command_argument
+            (identifier))))))
+  (item
+    (command_statement
+      (identifier)
+      (command_argument
+        (selector
+          (selector_marker)))
+      (command_argument
+        (string
+          (string_content)))
+      (argument_block
+        (named_argument
+          (identifier)
+          (string
+            (string_content)))))))
